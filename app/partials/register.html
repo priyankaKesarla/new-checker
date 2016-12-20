@@ -1,0 +1,26 @@
+<div class="container">
+	<h1>Register</h1>
+	<form name="registerForm">
+	    <div class="row">
+	      <div class="col-xs-2">
+	        <input type="text" class="form-control" placeholder="Employeename" ng-model="employee.employeename" required/>
+	      </div>
+	      <div class="col-xs-2">
+	        <input type="text" class="form-control" placeholder="Password" ng-model="employee.password" required/>
+	      </div>
+            
+            <div class="col-xs-2">
+        <select class="form-control" ng-model="employee.role">
+          <option value="Manager">Manager</option>
+          <option value="TechLead">TechLead</option>
+            <option value="Developer">Developer</option>
+        </select>
+      </div>
+	     
+	      <div class="col-xs-2">
+	        <button type="submit" class="btn btn-primary" ng-click="register(employee)">Register</button>
+	      </div>
+	    </div>
+	</form>
+  
+</div>
