@@ -9,7 +9,7 @@ exports.login = function(req, res, next) {
     }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      return res.send(user.username);
+      return res.send({name:user.employeename,role:user.role});
     });
   })(req, res, next);
 };
@@ -40,7 +40,7 @@ exports.register = function(req, res) {
                       console.log("MY Error" +err);
                         return res.sendStatus(400);
                   }
-                     return res.sendStatus(200);
+                    // return res.sendStatus(200);
                 });
             }
         else if(employee.role=="TechLead")
@@ -53,7 +53,7 @@ exports.register = function(req, res) {
                       console.log("MY Error" +err);
                         return res.sendStatus(400);
                   }
-                     return res.sendStatus(200);
+                    // return res.sendStatus(200);
                 });
             }
         else
@@ -66,7 +66,7 @@ exports.register = function(req, res) {
                       console.log("MY Error" +err);
                         return res.sendStatus(400);
                   }
-                     return res.sendStatus(200);
+                    // return res.sendStatus(200);
                 });
             }
          return res.sendStatus(200);

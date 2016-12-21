@@ -13,13 +13,13 @@ passport.deserializeUser(function(id, done) {
 });
 
 passport.use(new LocalStrategy(function(username, password, done) {
-  db.employeeModel.findOne({ employeename: username }, function(err, user) {
+  db.employeeModel.findOne({ employeename: username }, function(err, employee) {
     if (err) { return done(err); }
-    if (!user) { return done(null, false, { message: 'Unknown user ' + username }); }
-    user.comparePassword(password, function(err, isMatch) {
+    if (!employee) { return done(null, false, { message: 'Unknown user ' + username }); }
+    employee.comparePassword(password, function(err, isMatch) {
       if (err) return done(err);
       if(isMatch) {
-        return done(null, user);
+        return done(null, employee);
       } else {
         return done(null, false, { message: 'Invalid password' });
       }

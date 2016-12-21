@@ -25,6 +25,7 @@ var Employee = new Schema({
 
 var Project=new Schema({
     projectName:{ type: String, required: true, unique: true },
+    teamSize:{type: Number, required: true, unique: true }
 });
 
 var Tasks=new Schema({
