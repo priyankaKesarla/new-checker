@@ -1,11 +1,15 @@
-budgetControllers.controller('CategoryCtrl', ['$scope', '$http',
-	function CategoryCtrl($scope, $http) {
+budgetControllers.controller('ManagerCtrl', ['$scope', '$http',
+	function ManagerCtrl($scope, $http) {
 
-		$http.get('http://localhost:4000/categories', {withCredentials: true}).success(function(data) {
-	    	$scope.categories = data;
+		$http.get('http://localhost:4000/developers', {withCredentials: true}).success(function(data) {
+	    	$scope.developers = data;
+	    });
+        
+        $http.get('http://localhost:4000/techLeads', {withCredentials: true}).success(function(data) {
+	    	$scope.techLeads = data;
 	    });
 
-	    $scope.addCategory = function(category) {
+	    /*$scope.addCategory = function(category) {
 	    	if (category === undefined || category.name == null) {
 	    		return ;
 	    	}
@@ -18,7 +22,7 @@ budgetControllers.controller('CategoryCtrl', ['$scope', '$http',
 	    	$http.post('http://localhost:4000/categories', c, {withCredentials: true}).success(function(data) {
 		    	$scope.categories.push(data);
 		    });
-	    };
+	    };*/
 
 	    $scope.deleteCategory = function(categoryId) {
 	    	$http.delete('http://localhost:4000/categories/' + categoryId, {withCredentials: true}).success(function(data) {

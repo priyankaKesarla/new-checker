@@ -18,17 +18,17 @@
 
     <div class="container navbar navbar-inverse" role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#/accounts">Expense Manager</a>
+            <a class="navbar-brand" href="#/accounts">Project Management</a>
         </div>
         <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#/records">Expenses</a></li>
-                <li><a href="#/categories">Categories</a></li>
-                <li><a href="#/about">About</a></li>
+            <ul class="nav navbar-nav" ng-if="user.user.role=='manager'">
+                <li><a href="#/records">Create Project</a></li>
+                <li><a href="#/categories">Add TechLeads</a></li>
+                <li><a href="#/about">Add Developers</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li ng-if="user.isLogged"><a href="#/logout">Welcome, {{user.user}}! Logout</a></li>
+                <li ng-if="user.isLogged"><a href="#/logout">Welcome, {{user.user.name}}! Logout</a></li>
                 <li ng-if="!user.isLogged"><a href="#/login">Login</a></li>
                 <li ng-if="!user.isLogged"><a href="#/register">Register</a></li>
             </ul>

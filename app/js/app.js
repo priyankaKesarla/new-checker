@@ -61,6 +61,21 @@ budgetApp.config(['$routeProvider',
         controller: 'UserLogoutCtrl',
         access: { requiredLogin: true }
       }).
+      when('/manager', {
+        templateUrl: 'partials/manager.html',
+        controller: 'ManagerCtrl',
+        access: { requiredLogin: true }
+      }).
+      when('/techLead', {
+        templateUrl: 'partials/techLead.html',
+       // controller: 'UserRegisterCtrl',
+        access: { requiredLogin: true }
+      }).
+      when('/developer', {
+        templateUrl: 'partials/developer.html',
+       // controller: 'UserRegisterCtrl',
+        access: { requiredLogin: true }
+      }).
       otherwise({
         redirectTo: '/records',
         access: { requiredLogin: true }
