@@ -12,12 +12,13 @@ exports.list = function(req, res) {
 }
 
 exports.create = function(req, res) {
+    console.log(req.body);
 	if (req.body.name === undefined) {
 		return res.json(400);
 	}
 
 	var project = new db.projectModel();
-	project.name = req.body.name;
+	project.projectName = req.body.name;
     project.teamSize=req.body.teamSize;
 	project.employee_id = req.user._id;
 

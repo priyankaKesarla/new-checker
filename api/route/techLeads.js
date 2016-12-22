@@ -6,6 +6,7 @@ exports.list = function(req, res) {
 			console.log(err);
 			return res.send(400);
 		}
+        console.log(results);
 
 		return res.json(results);
 	});

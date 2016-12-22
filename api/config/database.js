@@ -24,14 +24,14 @@ var Employee = new Schema({
 });
 
 var Project=new Schema({
-    projectName:{ type: String, required: true, unique: true },
-    teamSize:{type: Number, required: true, unique: true },
+    projectName:{ type: String, required: true},
+    teamSize:{type: Number, required: true},
     employee_id: { type: Schema.ObjectId, ref: 'Employee', required: true }
 });
 
 var Tasks=new Schema({
     taskName:{ type: String, required: true, unique: true },
-    taskStatus:{ type: String, required: true, unique: true }
+    taskStatus:{ type: String, required: true }
     
 });
 var Manager = new Schema({

@@ -32,6 +32,7 @@ exports.register = function(req, res) {
     if(!err){
         if(employee.role=="Manager")
             {
+                console.log("checking employee is a manager");
                 var manager=new db.managerModel();
                 manager.employee_id=employee._id;
                 manager.save(function(err)
@@ -41,6 +42,7 @@ exports.register = function(req, res) {
                         return res.sendStatus(400);
                   }
                     // return res.sendStatus(200);
+                    console.log(manager._id);
                 });
             }
         else if(employee.role=="TechLead")
