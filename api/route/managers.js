@@ -13,7 +13,7 @@ exports.list = function(req, res) {
 //need only one account..................................................
 
 
-exports.create = function(req, res) {
+/*exports.create = function(req, res) {
 	if (req.body.name === undefined || req.body.currency === undefined) {
 		return res.json(400, {message:"Bad Data"});
 	}
@@ -59,7 +59,7 @@ exports.delete = function(req, res) {
 			return res.send(200);
 		});
 	});
-};
+};*/
 
 exports.detail = function(req, res) {
 	if (req.params.id === undefined) {

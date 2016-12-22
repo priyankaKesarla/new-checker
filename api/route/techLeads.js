@@ -1,7 +1,7 @@
 var db = require('../config/database.js');
 
 exports.list = function(req, res) {
-	db.accountModel.find({user_id: req.user._id}, function(err, results) {
+	db.techLeadModel.find({manager_id:null}, function(err, results) {
 		if (err) {
 			console.log(err);
 			return res.send(400);
@@ -13,6 +13,7 @@ exports.list = function(req, res) {
 //need only one account..................................................
 
 
+/*
 exports.create = function(req, res) {
 	if (req.body.name === undefined || req.body.currency === undefined) {
 		return res.json(400, {message:"Bad Data"});
@@ -92,3 +93,4 @@ exports.detail = function(req, res) {
 	});
 };
 
+*/

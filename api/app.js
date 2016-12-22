@@ -7,9 +7,10 @@ var path= require('path');
 
 //Route
 var routes = {};
-/*routes.accounts = require('./route/accounts.js');*/
-routes.records = require('./route/records.js');
-routes.categories = require('./route/categories.js');
+routes.projects = require('./route/projects.js');
+routes.managers = require('./route/managers.js');
+routes.techLeads = require('./route/techLeads.js');
+routes.developers = require('./route/developers.js');
 routes.users = require('./route/users.js');
 
 var bodyParser = require('body-parser');
@@ -58,6 +59,16 @@ app.post('/register', routes.users.register);
 
 app.get('/logout', pass.employeeIsAuthenticated, routes.users.logout);
 
+app.get('/developers', pass.employeeIsAuthenticated, routes.developers.list);
+
+app.post('/createProject', pass.employeeIsAuthenticated, routes.projects.create);
+
+app.get('/techLeads', pass.employeeIsAuthenticated, routes.techLeads.list);
+
+console.log('Employee mangement Node.js server starts..');
+
+app.listen(4000);
+
 /*
 //Get all accounts and compute balance.
 app.get('/accounts', pass.userIsAuthenticated, routes.accounts.list);
@@ -73,21 +84,19 @@ app.delete('/accounts/:id', pass.userIsAuthenticated, routes.accounts.delete);
 app.get('/accounts/:id', pass.userIsAuthenticated, routes.accounts.detail);*/
 
 
-app.get('/records', pass.employeeIsAuthenticated, routes.records.list);
+
 //Create new Record
-app.post('/records', pass.employeeIsAuthenticated, routes.records.create);
+
 
 //Delete Record
-app.delete('/records/:recordId', pass.employeeIsAuthenticated, routes.records.delete);
+//app.delete('/records/:recordId', pass.employeeIsAuthenticated, routes.records.delete);
 
 //Get all categories
-app.get('/categories', pass.employeeIsAuthenticated, routes.categories.list);
+
 
 //Create new category
-app.post('/categories', pass.employeeIsAuthenticated, routes.categories.create);
+//app.post('/techLeads', pass.employeeIsAuthenticated, routes.techLeads.create);
 
 //Delete Category
-app.delete('/categories/:categoryId', pass.employeeIsAuthenticated, routes.categories.delete);
+//app.delete('/techLeads/:techLeadId', pass.employeeIsAuthenticated, routes.categories.delete);
 
-console.log('Employee mangement Node.js server starts..');
-app.listen(4000);

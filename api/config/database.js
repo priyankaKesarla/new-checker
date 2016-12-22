@@ -25,7 +25,8 @@ var Employee = new Schema({
 
 var Project=new Schema({
     projectName:{ type: String, required: true, unique: true },
-    teamSize:{type: Number, required: true, unique: true }
+    teamSize:{type: Number, required: true, unique: true },
+    employee_id: { type: Schema.ObjectId, ref: 'Employee', required: true }
 });
 
 var Tasks=new Schema({
@@ -35,20 +36,24 @@ var Tasks=new Schema({
 });
 var Manager = new Schema({
   employee_id: { type: Schema.ObjectId, ref: 'Employee', required: true },
-    techLead_id: { type: Schema.ObjectId, ref: 'TechLead'},
-    developer_id: { type: Schema.ObjectId, ref: 'Developer'},
-    project_id: { type: Schema.ObjectId, ref: 'Project'}
+    //techLead_id: { type: Schema.ObjectId, ref: 'TechLead'},
+   // developer_id: { type: Schema.ObjectId, ref: 'Developer'},
+   // project_id: { type: Schema.ObjectId, ref: 'Project'}
 });
 
 var TechLead = new Schema({
   employee_id: { type: Schema.ObjectId, ref: 'Employee', required: true },
-    developer_id: { type: Schema.ObjectId, ref: 'Developer'},
-    task_id_id: { type: Schema.ObjectId, ref: 'Tasks'}
+    manager_id: { type: Schema.ObjectId, ref: 'Manager'},
+    task_id_id: { type: Schema.ObjectId, ref: 'Tasks'},
+     project_id: { type: Schema.ObjectId, ref: 'Project'}
 });
 
 var Developer = new Schema({
   employee_id: { type: Schema.ObjectId, ref: 'Employee', required: true },
-    task_id_id: { type: Schema.ObjectId, ref: 'Tasks'}
+    manager_id: { type: Schema.ObjectId, ref: 'Manager'},
+    techLead_id:{ type: Schema.ObjectId, ref: 'TechLead'},
+    task_id_id: { type: Schema.ObjectId, ref: 'Tasks'},
+     project_id: { type: Schema.ObjectId, ref: 'Project'}
 });
 
 

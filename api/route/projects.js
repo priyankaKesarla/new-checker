@@ -1,7 +1,7 @@
 var db = require('../config/database.js');
 
 exports.list = function(req, res) {
-  	db.categoryModel.find({user_id: req.user._id}, function(err, results) {
+  	db.projectModel.find({employee_id: req.user._id}, function(err, results) {
   		if (err) {
   			console.log(err);
   			return res.send(400);
@@ -16,21 +16,22 @@ exports.create = function(req, res) {
 		return res.json(400);
 	}
 
-	var category = new db.categoryModel();
-	category.name = req.body.name;
-	category.user_id = req.user._id;
+	var project = new db.projectModel();
+	project.name = req.body.name;
+    project.teamSize=req.body.teamSize;
+	project.employee_id = req.user._id;
 
-	category.save(function(err) {
+	project.save(function(err) {
 		if (err) {
 			console.log(err);
 			return res.send(400);
 		}
 
-		return res.json(category);
+		return res.json(project);
 	});
 }
 
-exports.delete = function(req, res) {
+/*exports.delete = function(req, res) {
 	if (req.params.categoryId === undefined) {
 		return res.json(400);
 	}
@@ -46,4 +47,4 @@ exports.delete = function(req, res) {
 		result.remove();
 		return res.send(200);
 	});
-}
+}*/
