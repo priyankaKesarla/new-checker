@@ -4,19 +4,25 @@ budgetControllers.controller('ManagerCtrl', ['$scope', '$http',
 
 		$http.get('http://localhost:4000/developers', {withCredentials: true}).success(function(data) {
 	    	$scope.developers = data;
-	    });
+            //console.log("developers........................"+$scope.developers );
+	    }).catch(function(err)
+                {
+            console.log("error....................");
+        });
         
         $http.get('http://localhost:4000/techLeads', {withCredentials: true}).success(function(data) {
 	    	$scope.techLeads = data;
+            // console.log("developers........................"+$scope.techLeads);
 	    });
 
 	    $scope.createProject = function(project) {
-	    	if (project === undefined || project.name == null) {
+            console.log(project.name);
+	    	if (project.name === undefined || project.name == null) {
 	    		return ;
 	    	}
 
 
-	    	//Save Category
+	    	//Save project
 	    	$http.post('http://localhost:4000/createProject', project, {withCredentials: true}).success(function(data) {
 		    	$scope.project=data;
                 $scope.ifClicked=true;
