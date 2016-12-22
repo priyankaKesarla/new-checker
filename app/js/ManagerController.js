@@ -4,15 +4,21 @@ budgetControllers.controller('ManagerCtrl', ['$scope', '$http',
 
 		$http.get('http://localhost:4000/developers', {withCredentials: true}).success(function(data) {
 	    	$scope.developers = data;
-            //console.log("developers........................"+$scope.developers );
-	    }).catch(function(err)
-                {
-            console.log("error....................");
-        });
+            $scope.developers.forEach(function(val)
+                                    {
+                 console.log("developers........................"+val.employee_id );
+            });
+            
+           
+	    });
         
         $http.get('http://localhost:4000/techLeads', {withCredentials: true}).success(function(data) {
 	    	$scope.techLeads = data;
-            // console.log("developers........................"+$scope.techLeads);
+            $scope.techLeads.forEach(function(val)
+                                    {
+                 console.log("techleads........................"+val.employee_id);
+            });
+            
 	    });
 
 	    $scope.createProject = function(project) {
@@ -23,7 +29,7 @@ budgetControllers.controller('ManagerCtrl', ['$scope', '$http',
 
 
 	    	//Save project
-	    	$http.post('http://localhost:4000/createProject', project, {withCredentials: true}).success(function(data) {
+	    	$http.post('http://localhost:4000/createProject', project, {withCredentials:true}).success(function(data) {
 		    	$scope.project=data;
                 $scope.ifClicked=true;
 		    });
