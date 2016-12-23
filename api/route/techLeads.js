@@ -1,5 +1,5 @@
 var db = require('../config/database.js');
-
+var editedTechLeads=[];
 exports.list = function(req, res) {
 	db.techLeadModel.find({manager_id:null}, function(err, results) {
 		if (err) {
@@ -7,8 +7,23 @@ exports.list = function(req, res) {
 			return res.send(400);
 		}
         console.log(results);
+        results.forEach(function(tech)
+                       {
+            db.techLeadModel.findOne({_id:tech._id})
+  .populate('employee_id','employeename')
+  .exec (function(err, techlead)
+            {
+                if(!err)
+                    {
+                        console.log(techlead.employee_id.employeename);
+                        
+                editedTechLeads.push(techlead);
+                                            }
 
-		return res.json(results);
+            })
+        });
+
+		return res.json(editedTechLeads);
 	});
 };
 //need only one account..................................................

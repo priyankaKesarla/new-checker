@@ -1,13 +1,28 @@
 var db = require('../config/database.js');
-
+var editedDevelopers=[];
 exports.list = function(req, res) {
 	db.developerModel.find({manager_id:null}, function(err, results) {
 		if (err) {
 			console.log(err);
 			return res.send(400);
 		}
+        results.forEach(function(dev)
+                       {
+            db.developerModel.findOne({_id:dev._id})
+  .populate('employee_id','employeename')
+  .exec (function(err, developer)
+            {
+                if(!err)
+                    {
+                        console.log(developer.employee_id.employeename);
+                        
+                editedDevelopers.push(developer);
+                                            }
 
-		return res.json(results);
+            })
+        });
+
+		return res.json(editedDevelopers);
 	});
 };
 //need only one account..................................................
