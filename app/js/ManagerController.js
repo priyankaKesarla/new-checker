@@ -4,9 +4,10 @@ budgetControllers.controller('ManagerCtrl', ['$scope', '$http',
 
 		$http.get('http://localhost:4000/developers', {withCredentials: true}).success(function(data) {
 	    	$scope.developers = data;
-            $scope.developers.forEach(function(val)
+           // console.log($scope.developers);
+            data.forEach(function(val)
                                     {
-                 console.log("developers........................"+val.employee_id );
+                 console.log("developers........................"+val.employee_id.employeename);
             });
             
            
@@ -14,10 +15,10 @@ budgetControllers.controller('ManagerCtrl', ['$scope', '$http',
         
         $http.get('http://localhost:4000/techLeads', {withCredentials: true}).success(function(data) {
 	    	$scope.techLeads = data;
-            $scope.techLeads.forEach(function(val)
+            /*$scope.techLeads.forEach(function(val)
                                     {
-                 console.log("techleads........................"+val.employee_id);
-            });
+                 console.log("techleads........................"+val.employee_id.employeename);
+            });*/
             
 	    });
 
