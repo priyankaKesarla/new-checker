@@ -12,6 +12,7 @@ routes.managers = require('./route/managers.js');
 routes.techLeads = require('./route/techLeads.js');
 routes.developers = require('./route/developers.js');
 routes.users = require('./route/users.js');
+routes.structure = require('./route/structure.js');
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -62,6 +63,8 @@ app.get('/logout', pass.employeeIsAuthenticated, routes.users.logout);
 app.get('/developers', pass.employeeIsAuthenticated, routes.developers.list);
 
 app.post('/createProject', pass.employeeIsAuthenticated, routes.projects.create);
+
+app.post('/createStructure', pass.employeeIsAuthenticated, routes.structure.create)
 
 app.get('/techLeads', pass.employeeIsAuthenticated, routes.techLeads.list);
 

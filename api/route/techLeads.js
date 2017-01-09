@@ -1,31 +1,91 @@
 var db = require('../config/database.js');
-var editedTechLeads=[];
+
+var async=require('async');
 exports.list = function(req, res) {
-	db.techLeadModel.find({manager_id:null}, function(err, results) {
+    var editedTechLeads=[];
+    async.waterfall([
+        function(callback)
+        {
+           db.techLeadModel.find({manager_id:null}, function(err, results) {
 		if (err) {
 			console.log(err);
 			return res.send(400);
 		}
-        console.log(results);
-        results.forEach(function(tech)
+               else if(results.length==0)
+                   {
+                       return res.send("techleads not available");
+                   }
+               else{
+                    callback(null,results);
+               }
+              
+           });
+            
+        },
+        function(results,callback)
+        {
+            var checker=results.length;
+            results.forEach(function(tech)
                        {
             db.techLeadModel.findOne({_id:tech._id})
   .populate('employee_id','employeename')
-  .exec (function(err, techlead)
+  .exec (function(err, techLeads)
             {
                 if(!err)
                     {
-                        console.log(techlead.employee_id.employeename);
+                        console.log(techLeads.employee_id.employeename);
+                       --checker; 
+                editedTechLeads.push(techLeads);
+                                            }
+                if(checker==0)
+                {
+                     callback();
+                }
+           
+
+            })
+        });
+            
+        }
+        
+    ],function(error)
+                   {
+        if(!error)
+            {
+                console.log("developers length...........",editedTechLeads.length);
+                return res.json(editedTechLeads);
+            }
+        else{
+            console.log("techleads error");
+        }
+    });
+}
+/*exports.list = function(req, res) {
+    var editedDevelopers=[];
+	db.developerModel.find({manager_id:null}, function(err, results) {
+		if (err) {
+			console.log(err);
+			return res.send(400);
+		}
+        results.forEach(function(dev)
+                       {
+            db.developerModel.findOne({_id:dev._id})
+  .populate('employee_id','employeename')
+  .exec (function(err, developer)
+            {
+                if(!err)
+                    {
+                        console.log(developer.employee_id.employeename);
                         
-                editedTechLeads.push(techlead);
+                editedDevelopers.push(developer);
                                             }
 
             })
         });
 
-		return res.json(editedTechLeads);
+		return res.json(editedDevelopers);
 	});
-};
+};*/
 //need only one account..................................................
 
 

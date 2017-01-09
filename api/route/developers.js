@@ -1,6 +1,60 @@
 var db = require('../config/database.js');
-var editedDevelopers=[];
+
+var async=require('async');
 exports.list = function(req, res) {
+    var editedDevelopers=[];
+    async.waterfall([
+        function(callback)
+        {
+           db.developerModel.find({manager_id:null}, function(err, results) {
+		if (err) {
+			console.log(err);
+			return res.send(400);
+		}
+               callback(null,results);
+           });
+            
+        },
+        function(results,callback)
+        {
+            var checker=results.length;
+            results.forEach(function(dev)
+                       {
+            db.developerModel.findOne({_id:dev._id})
+  .populate('employee_id','employeename')
+  .exec (function(err, developer)
+            {
+                if(!err)
+                    {
+                        console.log(developer.employee_id.employeename);
+                       --checker; 
+                editedDevelopers.push(developer);
+                                            }
+                if(checker==0)
+                {
+                     callback();
+                }
+           
+
+            })
+        });
+            
+        }
+        
+    ],function(error)
+                   {
+        if(!error)
+            {
+                console.log("developers length...........",editedDevelopers.length);
+                return res.json(editedDevelopers);
+            }
+        else{
+            console.log("developers error");
+        }
+    });
+}
+/*exports.list = function(req, res) {
+    var editedDevelopers=[];
 	db.developerModel.find({manager_id:null}, function(err, results) {
 		if (err) {
 			console.log(err);
@@ -24,7 +78,7 @@ exports.list = function(req, res) {
 
 		return res.json(editedDevelopers);
 	});
-};
+};*/
 //need only one account..................................................
 
 

@@ -36,14 +36,15 @@ var Tasks=new Schema({
 });
 var Manager = new Schema({
   employee_id: { type: Schema.ObjectId, ref: 'Employee', required: true },
-    //techLead_id: { type: Schema.ObjectId, ref: 'TechLead'},
-   // developer_id: { type: Schema.ObjectId, ref: 'Developer'},
-   // project_id: { type: Schema.ObjectId, ref: 'Project'}
+    techLead_id: [{ type: Schema.ObjectId, ref: 'TechLead'}],
+    developer_id: [{ type: Schema.ObjectId, ref: 'Developer'}],
+    project_id: { type: Schema.ObjectId, ref: 'Project'}
 });
 
 var TechLead = new Schema({
   employee_id: { type: Schema.ObjectId, ref: 'Employee', required: true },
     manager_id: { type: Schema.ObjectId, ref: 'Manager'},
+    developer_id: [{ type: Schema.ObjectId, ref: 'Developer'}],
     task_id_id: { type: Schema.ObjectId, ref: 'Tasks'},
      project_id: { type: Schema.ObjectId, ref: 'Project'}
 });
