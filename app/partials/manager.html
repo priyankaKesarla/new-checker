@@ -4,7 +4,17 @@
  
   <form name="addRecordForm" ng-if="!ifClicked">
     <div class="row">
-      <div class="col-xs-2">
+        <div class="col-xs-2">
+        <select class="form-control" ng-model="record.category" multiple=true>
+          <option ng-repeat="category in categories">{{category.name}}</option>
+        </select>
+      </div>
+        <div class="col-xs-2">
+        <select class="form-control" ng-model="record.category" multiple=true>
+          <option ng-repeat="category in categories">{{category.name}}</option>
+        </select>
+      </div>
+      <!--<div class="col-xs-2">
         <input type="text" class="form-control" placeholder="Project Name" ng-model="project.name" required/>
       </div>
       <div class="col-xs-4">
@@ -12,8 +22,10 @@
       </div>
       <div class="col-xs-2">
         <button type="submit" class="btn btn-primary" ng-click="createProject(project)">Create</button>
-      </div>
+      </div>-->
     </div>
+      
+      
   </form>
   
     
@@ -48,14 +60,4 @@
       </tr>
     </tbody>
   </table>
-
-
-
-  <canvas align="center" id="canvas" height="450" width="450"></canvas>
-    <div>
-        <span ng-repeat='cl in colors'>
-        <h4 style='color:{{cl.color}}'>{{cl.category}}</h4>
-            </span>
-    </div>-->
-  
 </div>
